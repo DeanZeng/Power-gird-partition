@@ -18,12 +18,15 @@ loadNum=length(loads(:,1));
 Bl=0;
 for i=1:genNum
     for j=1:loadNum
-    %  Bl=Bl+abs(gen(i,2))*abs(loads(j,2))*abs(PTDF(l,gen(i,1))-PTDF(l,loads(j,1)));
-       TCij=fastTC(PTDF,Pnet,gen(i,1),loads(j,1));
-       Bl=Bl+TCij*abs(PTDF(l,gen(i,1))-PTDF(l,loads(j,1)));
-    end
-    if isnan(Bl)
-        i
-        j
+%   method 1      
+%   Bl=Bl+abs(gen(i,2))*abs(loads(j,2))*abs(PTDF(l,gen(i,1))-PTDF(l,loads(j,1)));
+%   method 2
+%   TCij=fastTC(PTDF,Pnet,gen(i,1),loads(j,1));
+%   Bl=Bl+TCij*abs(PTDF(l,gen(i,1))-PTDF(l,loads(j,1)));
+%   method 3
+%  Bl=Bl+sqrt(abs(gen(i,2))*abs(loads(j,2)))*abs(PTDF(l,gen(i,1))-PTDF(l,loads(j,1)));
+%   method 4
+   TCij=fastTC(PTDF,Pnet,gen(i,1),loads(j,1));
+   Bl=Bl+TCij*sqrt(abs(gen(i,2))*abs(loads(j,2)))*abs(PTDF(l,gen(i,1))-PTDF(l,loads(j,1)));
     end
 end
